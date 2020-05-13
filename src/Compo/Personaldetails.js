@@ -8,12 +8,17 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import { withStyles } from '@material-ui/core/styles';
 
-
-
-
-
-
+const Styles = theme =>
+(
+  {
+    field: {
+     color: "rgba(0, 0, 0, 0.04)",
+     padding:"10px"
+    }
+  }
+);
 
 class Personaldetails extends Component {
 
@@ -38,9 +43,19 @@ class Personaldetails extends Component {
     render() {
       
       const date = {
-        color: "rgba(0, 0, 0, 0.04) !important"
-      
+        color: "rgba(0, 0, 0, 0.04) !important",
+         paddingTop:"20px"
       };
+
+     const form = {
+       marginLeft:"-180px",
+       marginTop:"10px"
+     }
+
+     const formInput =
+     {
+      color: "grey"
+     }
 
       const  {values, handleChange} = this.props;
       return (
@@ -51,42 +66,51 @@ class Personaldetails extends Component {
              <AppBar title="Enter Personal Details"/>
   
              <TextField  
-             style={date}
+            
 
              floatingLabelText="Date of Birth"
-           
+            style={date}
              type="date"
-           
+             inputStyle={{color: "rgba(0, 0, 0, 0.38)"}}
              onChange={handleChange('dob')}
              defaultValue={values.dob}
            
             />
-             <br/>
-             <TextField
+            {/* <br/>
+            <TextField
              hintText="Sex"
              floatingLabelText="Sex"
              onChange={handleChange('sex')}
              defaultValue={values.sex}
              
-             />
+             /> */}
              
-             <br/>
+             {/* <br/>
              <TextField
              hintText="Enter Your Qualification"
              floatingLabelText="Qualification"
              onChange={handleChange('qualification')}
              defaultValue={values.qualification}
       
-             />
+             /> */}
+
+<br/> <br/>
+     <FormControl component="fieldset" style={form}>
+      <FormLabel component="legend">Qualification</FormLabel>
+      <RadioGroup aria-label="gender" name="gender1" onChange={handleChange('qualification')} value={values.qualification} >
+        <FormControlLabel style={formInput} value="Undergraduate" control={<Radio />} label="Undergraduate" />
+        <FormControlLabel style={formInput} value="Graduate" control={<Radio />} label="Graduate" />
+        <FormControlLabel  style={formInput} value="Postgraduate" control={<Radio />} label="Postgraduate" />
       
-             
+        </RadioGroup>
+    </FormControl>  
      <br/> <br/>
-     <FormControl component="fieldset">
+     <FormControl component="fieldset" style={form}>
       <FormLabel component="legend">Gender</FormLabel>
-      <RadioGroup aria-label="gender" name="gender1" value={values.sex} onChange={handleChange}>
-        <FormControlLabel value="female" control={<Radio />} label="Female" />
-        <FormControlLabel value="male" control={<Radio />} label="Male" />
-        <FormControlLabel value="other" control={<Radio />} label="Other" />
+      <RadioGroup aria-label="gender" name="gender1" onChange={handleChange('sex')} value={values.sex} >
+        <FormControlLabel style={formInput} value="female" control={<Radio />} label="Female" />
+        <FormControlLabel style={formInput} value="male" control={<Radio />} label="Male" />
+        <FormControlLabel  style={formInput} value="other" control={<Radio />} label="Other" />
         
       </RadioGroup>
     </FormControl>
